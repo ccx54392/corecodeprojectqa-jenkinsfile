@@ -41,7 +41,7 @@ IntegrationTest:{
     stage("Integration Testing"){
         node("windowsNode"){
             checkoutTesting("tests")
-            runner 'cd tests && mvn test -Dgroups=integrationTest -DapiUrl=${apiUrl}'
+            runner 'cd tests && mvn test -Dgroups=integrationTest -DapiUrl=%apiUrl%'
         }
     }
 }
@@ -49,7 +49,7 @@ SystemTest:{
     stage("System or E2E Testing"){
         node("windowsNode"){
             checkoutTesting("tests")
-            runner 'cd tests && mvn test -Dgroups=systemTest -DwebUrl=${webUrl} -Dbrowser=${browser}'
+            runner 'cd tests && mvn test -Dgroups=systemTest -DwebUrl=%webUrl% -Dbrowser=%browser%'
         }
     }
 }
