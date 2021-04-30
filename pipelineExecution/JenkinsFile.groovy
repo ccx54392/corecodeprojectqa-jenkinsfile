@@ -31,7 +31,7 @@ def runner = { commandToExecute -> isUnix() ? sh(commandToExecute) : bat(command
 
 unitTest:{
     stage("Unit Testing"){
-        node({myNode}){
+        node("windowsNode"){
             checkoutApi("tests")
             runner 'cd tests && mvn test -Dgroups=unitTest'
         }
@@ -39,7 +39,7 @@ unitTest:{
 }
 IntegrationTest:{
     stage("Integration Testing"){
-        node({myNode}){
+        node("windowsNode"){
             checkoutTesting("tests")
             runner 'cd tests && mvn test -Dgroups=integrationTest -DapiUrl=${apiUrl}'
         }
@@ -47,7 +47,7 @@ IntegrationTest:{
 }
 SystemTest:{
     stage("System or E2E Testing"){
-        node({myNode}){
+        node("windowsNode"){
             checkoutTesting("tests")
             runner 'cd tests && mvn test -Dgroups=systemTest -DwebUrl=${webUrl} -Dbrowser=${browser}'
         }
